@@ -60,7 +60,6 @@ public class Repeat_String {
 				}
 			}
 		}
-		
 		sc.close();
 	}
 }
