@@ -3,28 +3,25 @@ package baekjoon.Step6_String;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-
 public class CompareConst {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		String input="";
 		String var1="";
 		String var2="";
 		
 		do {
-			input = sc.nextLine();
-		}while( input.contains("0") || input.length() > 3 );
-		
-		StringTokenizer st = new StringTokenizer(input, " ");
-		while(st.hasMoreTokens()) {
-			var1 = st.nextToken();
-			var2 = st.nextToken();
-		}
-		
-		do {
-			var2 = sc.next();
-		}while( var2.contains("0") || var2.length() > 3 || var2.equals(var1));
+			StringTokenizer st = new StringTokenizer(sc.nextLine(), " ");
+			
+			while(st.hasMoreTokens()) {
+				var1 = st.nextToken();
+				var2 = st.nextToken();
+			}
+			
+		}while( var1.contains("0") || var2.contains("0")
+			 || var1.length() <= 0  || var1.length() > 3
+			 || var2.contains("0") || var2.contains("0")
+			 || var2.length() <= 0  || var2.length() > 3 );
 		
 		String newVar1 = "";
 		String newVar2 = "";
@@ -48,5 +45,4 @@ public class CompareConst {
 			System.out.println(intvar2);
 		}
 	}
-
 }
