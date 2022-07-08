@@ -9,6 +9,7 @@ public class Croatia_Alphabet {
 		Scanner sc = new Scanner(System.in);
 		String str = "";
 		boolean flag;
+		String [] strArray = {"c=" , "c-", "dz=", "d-", "lj", "nj", "s=", "z="};
 		
 		do {
 			flag= true;
@@ -26,11 +27,16 @@ public class Croatia_Alphabet {
 					flag = false;
 					break;
 				}
-				
 			}//end for i
 			
 		}while(str.length() > 100 || flag == false);
+		for(int j=0; j<strArray.length;j++) {
+			
+			if(str.indexOf(strArray[j])!=-1) {
+				str=str.replace(strArray[j], "!");
+			}
+		}//end for j
 		
-		System.out.println(str);
+		System.out.println(str.length());
 	}
 }
