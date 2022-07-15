@@ -17,7 +17,7 @@ public class GroupWordChecker {
 		String str ="";
 		boolean chkFlag;
 		
-		for(int i=0; i < wordCnt ; i++) {
+		for(int i=0; i < strArray.length ; i++) {
 			
 			do {
 				//입력
@@ -25,17 +25,17 @@ public class GroupWordChecker {
 				str = sc.next();
 				//길이체크
 				if(0 < str.length() && str.length() <= 100) {
-					System.out.println("길이체크 완료");
+
 					for(int j=0 ; j<str.length(); j++) {
 						//소문자 체크
-						if(97 <= str.charAt(i) &&  str.charAt(i) <= 122) {
-							System.out.println("소문자체크 완료");
+						if(97 <= Integer.valueOf(str.charAt(j))  &&  Integer.valueOf(str.charAt(j)) <= 122) {
 							continue;
 						}else {
 							chkFlag = false;
 							break;	
 						}	
 					}//end j
+					
 				}else {
 					chkFlag = false;
 					break;
@@ -44,27 +44,57 @@ public class GroupWordChecker {
 				//중복체크
 				if(i!=0 && chkFlag != false) {
 					for(int k=0 ; k<i ; k++) {
-//						System.out.println("k : " + k);
-//						System.out.println("strArray[k] : " + strArray[k]);
-//						System.out.println("str : " + str);
-//						System.out.println("strArray[k].contains(str) : " + strArray[k].contains(str));
-						if(strArray[k].contains(str)) {
+						if(strArray[k].equals(str)) {
 							chkFlag = false;
 							break;
-						}else {
-							System.out.println("중복체크 완료");
-						}
+						}else continue;
 					}//end k
 				}
 			}while(chkFlag != true);
 			
 			strArray[i] = str;
-			System.out.println("i : " + i + ", strArray[i] : " +strArray[i]);
 		}//end i
 		
+		int cnt =0;
+		boolean idxFlag=false;
+		String[] testStrArray; 
+		String jstr="";
+		String kstr="";
+		//체크부
 		for(int i=0; i<strArray.length; i++) {
-			System.out.println(strArray[i]);
-		}
+			testStrArray = new String[strArray[i].length()];
+			
+			for(int j=0; j< strArray[i].length(); j++) {
+				idxFlag =false;
+				testStrArray[j] = String.valueOf(strArray[i].subSequence(j, j+1));
+				jstr = testStrArray[j];
+				
+				if(j!=0){
+					
+					for(int k=0; k<j ;k++) {
+						kstr = testStrArray[k];
+						
+						if(jstr.equals(kstr) && j-k ==1) {
+							//System.out.println("chk1 i : " +i+", j : "+j+", jstr : " + jstr+ ", k : "+k +", kstr : "+kstr);
+							idxFlag =true;
+						}else if(!jstr.equals(kstr)) {
+							//System.out.println("chk2 i : " +i+", j : "+j+", jstr : " + jstr+ ", k : "+k +", kstr : "+kstr);
+							idxFlag =true;
+						}else {
+							//System.out.println("chk3 i : " +i+", j : "+j+", jstr : " + jstr+ ", k : "+k +", kstr : "+kstr);
+							idxFlag =false;
+							break;
+						}
+						
+					}//end for k
+				}else if(j==0) {
+					idxFlag =true;
+				}
+			}//end for j
+			
+			if(idxFlag ==true) cnt++;
+		}//end for i
+		System.out.println(cnt);
 		
 		sc.close();
 	}
